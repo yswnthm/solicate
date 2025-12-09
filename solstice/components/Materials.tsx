@@ -31,9 +31,6 @@ export const Materials: React.FC = () => {
 
   return (
     <section className="py-32 px-6 md:px-20 bg-[#EEECE7]">
-      <div className="absolute top-12 left-6 md:left-12 text-xs uppercase tracking-widest text-nordic-charcoal/50 z-20">
-        Capabilities
-      </div>
       <div className="flex flex-col md:flex-row justify-between items-end mb-20 border-b border-[#2E2E2E]/10 pb-8">
         <h2 className="font-serif-display text-4xl md:text-6xl text-[#2E2E2E]">Material Atlas</h2>
         <p className="font-sans-ui text-[#2E2E2E]/60 max-w-sm text-sm mt-4 md:mt-0">
