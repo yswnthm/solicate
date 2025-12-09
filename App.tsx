@@ -48,10 +48,16 @@ function App() {
 
       <main className="w-full relative z-10 bg-[#EEECE7]">
         <Hero />
-        <Ethos text="We shape ideas that linger like echoes in quiet rooms." />
+        <Ethos text="We shape ideas that settle like echoes in quiet rooms."
+          highlightWords={["echoes"]}
+          highlightColor="#D35400" />
         <SelectedWork />
         <Capabilities />
-        <Ethos text="Our principles are rooted in clarity, defined by honesty, and built to endure." />
+        <Ethos
+          text="Our principles are rooted in clarity, defined by honesty, and built to endure."
+          highlightWords={["clarity", "honesty", "endure"]}
+          highlightColor="#D35400"
+        />
         <Process />
         <Journal />
       </main>

@@ -3,10 +3,14 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface EthosProps {
   text?: string;
+  highlightWords?: string[];
+  highlightColor?: string;
 }
 
 export const Ethos: React.FC<EthosProps> = ({
-  text = "We shape ideas that linger like echoes in quiet rooms."
+  text = "We shape ideas that linger like echoes in quiet rooms.",
+  highlightWords = [],
+  highlightColor = "#D35400"
 }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -35,13 +39,17 @@ export const Ethos: React.FC<EthosProps> = ({
 
               const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
 
+              // Check if word (stripped of punctuation) should be highlighted
+              const cleanWord = word.replace(/[.,;!?]$/, "").toLowerCase();
+              const shouldHighlight = highlightWords.some(w => w.toLowerCase() === cleanWord);
+
               return (
                 <span key={i} className="relative">
                   <span className="absolute inset-0 text-[#2E2E2E]/10 select-none">{word}</span>
 
                   <motion.span
-                    style={{ opacity }}
-                    className="relative text-[#2E2E2E]"
+                    style={{ opacity, color: shouldHighlight ? highlightColor : "#2E2E2E" }}
+                    className="relative"
                   >
                     {word}
                   </motion.span>
