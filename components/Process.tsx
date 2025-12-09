@@ -17,6 +17,7 @@ export const Process: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const lineRef = useRef<SVGPathElement>(null);
     const dotsRef = useRef<(SVGCircleElement | null)[]>([]);
+    const [activeStep, setActiveStep] = React.useState<number>(-1);
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
@@ -37,6 +38,17 @@ export const Process: React.FC = () => {
                     start: 'top top',
                     end: 'bottom bottom',
                     scrub: 1,
+                    onUpdate: (self) => {
+                        // Calculate active step based on progress
+                        const progress = self.progress;
+                        // Map progress 0-1 to steps 0-length
+                        // We want the step to active slightly before the line hits it visually if possible,
+                        // or exactly when it passes.
+                        // Simple mapping:
+                        const totalSteps = steps.length;
+                        const index = Math.floor(progress * (totalSteps + 1)) - 1; // -1 to start clean
+                        setActiveStep(index);
+                    }
                 }
             });
 
@@ -51,9 +63,6 @@ export const Process: React.FC = () => {
             dotsRef.current.forEach((dot, index) => {
                 if (!dot) return;
 
-                // Calculate position in timeline (0 to 1)
-                // We want them to appear as the line passes them roughly.
-                // Assuming simple even spacing for this visual.
                 const startPos = index / (steps.length - 1 || 1);
 
                 // Animate dot scale/opacity
@@ -65,7 +74,7 @@ export const Process: React.FC = () => {
                         duration: 0.1, // Quick pop in
                         ease: "back.out(1.7)"
                     },
-                    startPos * 0.9 // Slight adjustment to sync with line leading edge
+                    startPos * 0.9
                 );
             });
 
@@ -106,7 +115,6 @@ export const Process: React.FC = () => {
                         <div
                             key={index}
                             className="relative z-10 flex flex-col items-center md:items-start group w-64 text-center md:text-left my-8 md:my-0"
-                            // Simple inline positioning for demo, in production calculate positions along path
                             style={{
                                 marginTop: index % 2 === 0 ? '0' : '200px', // Alternating height on desktop
                             }}
@@ -122,13 +130,21 @@ export const Process: React.FC = () => {
                                     {/* Pulse effect */}
                                     <circle
                                         cx="6" cy="6" r="12"
-                                        className="fill-birchwood/20 scale-0 opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100 origin-center"
+                                        className={`fill-birchwood/20 scale-0 opacity-0 transition-all duration-500 origin-center
+                                            ${activeStep === index ? 'scale-100 opacity-100' : 'group-hover:scale-100 group-hover:opacity-100'}
+                                        `}
                                     />
                                 </svg>
                             </div>
 
-                            <h3 className="font-display text-lg tracking-wide mb-2 transition-transform duration-300 group-hover:-translate-y-1">{step.label}</h3>
-                            <p className="text-sm text-nordic-charcoal/60 font-light opacity-0 translate-y-2 transition-all duration-500 delay-100 group-hover:opacity-100 group-hover:translate-y-0">
+                            <h3 className={`font-display text-lg tracking-wide mb-2 transition-transform duration-300
+                                ${activeStep === index ? '-translate-y-1' : 'group-hover:-translate-y-1'}
+                            `}>
+                                {step.label}
+                            </h3>
+                            <p className={`text-sm text-nordic-charcoal/60 font-light translate-y-2 transition-all duration-500 delay-100
+                                ${activeStep === index ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 group-hover:translate-y-0'}
+                            `}>
                                 {step.desc}
                             </p>
                         </div>
