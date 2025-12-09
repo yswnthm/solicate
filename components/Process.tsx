@@ -38,17 +38,14 @@ export const Process: React.FC = () => {
                     start: 'top top',
                     end: 'bottom bottom',
                     scrub: 1,
-                    onUpdate: (self) => {
-                        // Calculate active step based on progress
-                        const progress = self.progress;
-                        // Map progress 0-1 to steps 0-length
-                        // We want the step to active slightly before the line hits it visually if possible,
-                        // or exactly when it passes.
-                        // Simple mapping:
-                        const totalSteps = steps.length;
-                        const index = Math.floor(progress * (totalSteps + 1)) - 1; // -1 to start clean
-                        setActiveStep(index);
-                    }
+                },
+                onUpdate: function () {
+                    // Calculate active step based on timeline progress
+                    const progress = this.progress();
+                    // Use nearest neighbor to determine active step
+                    // This creates a "zone" around each step where it is active
+                    const index = Math.round(progress * (steps.length - 1));
+                    setActiveStep(index);
                 }
             });
 
@@ -142,7 +139,7 @@ export const Process: React.FC = () => {
                             `}>
                                 {step.label}
                             </h3>
-                            <p className={`text-sm text-nordic-charcoal/60 font-light translate-y-2 transition-all duration-500 delay-100
+                            <p className={`text-sm text-nordic-charcoal/60 font-light translate-y-2 transition-all duration-500
                                 ${activeStep === index ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 group-hover:translate-y-0'}
                             `}>
                                 {step.desc}
