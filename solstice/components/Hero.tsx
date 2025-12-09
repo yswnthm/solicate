@@ -23,7 +23,7 @@ export const Hero: React.FC = () => {
         className="z-10 relative flex flex-col items-center"
       >
         <h1 className="font-serif-display text-[15vw] leading-none tracking-tighter text-[#2E2E2E] mix-blend-multiply">
-          SOLSTICE
+          SOLICATE
         </h1>
         <p className="mt-8 font-sans-ui text-[#2E2E2E] tracking-[0.2em] text-sm uppercase opacity-60">
           Experiential Creative Studio
