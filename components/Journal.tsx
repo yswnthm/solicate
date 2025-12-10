@@ -11,7 +11,7 @@ const entries: JournalEntry[] = [
 
 export const Journal: React.FC = () => {
   return (
-    <section className="relative w-full bg-[#EEECE7]">
+    <section className="relative w-full bg-[#EEECE7] rounded-b-[3rem]">
       <div className="flex flex-col md:flex-row min-h-screen">
         {/* Sticky Left Column */}
         <div className="w-full md:w-1/3 md:h-screen md:sticky md:top-0 p-6 md:p-12 flex flex-col justify-between border-r border-[#2E2E2E]/10">
@@ -32,7 +32,7 @@ export const Journal: React.FC = () => {
         </div>
 
         {/* Scrolling Right Column */}
-        <div className="w-full md:w-2/3 bg-[#EEECE7]">
+        <div className="w-full md:w-2/3">
           {entries.map((entry, index) => (
             <JournalRow key={entry.id} entry={entry} index={index} />
           ))}
