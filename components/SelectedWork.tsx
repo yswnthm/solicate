@@ -49,8 +49,10 @@ export const SelectedWork: React.FC = () => {
     return (
         <section ref={containerRef} className="h-screen w-full overflow-hidden bg-arctic-linen flex items-center relative">
             {/* Label */}
-            <div className="absolute top-12 left-6 md:left-12 text-xs uppercase tracking-widest text-nordic-charcoal/50 z-20">
-                Selected Work (01—04)
+            <div className="absolute top-12 left-6 md:left-12 z-20">
+                <div className="text-xs uppercase tracking-widest text-nordic-charcoal/50">
+                    Selected Work (01—04)
+                </div>
             </div>
 
             <div ref={trackRef} className="flex gap-24 px-12 md:px-24 w-max h-full items-center">
@@ -76,8 +78,16 @@ export const SelectedWork: React.FC = () => {
                     </div>
                 ))}
 
+                {/* Visual Line at the end */}
+                <div className="w-[20vw] shrink-0 flex items-center justify-start pl-12">
+                    <svg width="180" height="12" className="overflow-visible">
+                        <circle cx="4" cy="6" r="3" className="fill-transparent stroke-nordic-charcoal/30 stroke-1" />
+                        <line x1="12" y1="6" x2="180" y2="6" className="stroke-nordic-charcoal/30 stroke-1" />
+                    </svg>
+                </div>
+
                 {/* Outro Spacer */}
-                <div className="w-[10vw] shrink-0" />
+                <div className="w-[5vw] shrink-0" />
             </div>
         </section>
     );
