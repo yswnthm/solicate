@@ -6,11 +6,11 @@ import { Project } from '../types';
 gsap.registerPlugin(ScrollTrigger);
 
 const projects: Project[] = [
-    { id: 1, title: 'Amtams', role: 'Hometreats Bakery Shop', year: '2023', image: '/images/amtams-img.png', video: '/videos/amtams.mp4', aspectRatio: 'aspect-video' },
-    { id: 2, title: 'Chlorophyll', role: 'Organic Laboratory', year: '2023', image: '/images/chlorophyll-img.png', video: '/videos/chlorophyll.mp4', aspectRatio: 'aspect-video' },
-    { id: 3, title: 'Kajal', role: 'UGC Portfolio', year: '2024', image: '/images/kajal-img.png', video: '/videos/kajal.mp4', aspectRatio: 'aspect-video' },
-    { id: 4, title: 'Kernelspace', role: 'Technical Lab', year: '2024', image: '/images/kernelspace-img.png', video: '/videos/kernelspace.mp4', aspectRatio: 'aspect-video' },
-    { id: 5, title: 'Vaani', role: 'Music Studio', year: '2024', image: '/images/vaani-img.png', video: '/videos/vaani.mp4', aspectRatio: 'aspect-video' },
+    { id: 1, title: 'Amtams', role: 'Hometreats Bakery Shop', year: '2023', image: '/images/amtams-img.png', video: '/videos/amtams.mp4', aspectRatio: 'aspect-video', link: 'https://amtams.solicate.pecup.in' },
+    { id: 2, title: 'Chlorophyll', role: 'Organic Laboratory', year: '2023', image: '/images/chlorophyll-img.png', video: '/videos/chlorophyll.mp4', aspectRatio: 'aspect-video', link: 'https://chlorophyll.solicate.pecup.in' },
+    { id: 3, title: 'Kajal', role: 'UGC Portfolio', year: '2024', image: '/images/kajal-img.png', video: '/videos/kajal.mp4', aspectRatio: 'aspect-video', link: 'https://kajal.solicate.pecup.in' },
+    { id: 4, title: 'Kernelspace', role: 'Technical Lab', year: '2024', image: '/images/kernelspace-img.png', video: '/videos/kernelspace.mp4', aspectRatio: 'aspect-video', link: 'https://kernelspace.solicate.pecup.in' },
+    { id: 5, title: 'Vaani', role: 'Music Studio', year: '2024', image: '/images/vaani-img.png', video: '/videos/vaani.mp4', aspectRatio: 'aspect-video', link: 'https://vaani.solicate.pecup.in' },
 ];
 
 export const SelectedWork: React.FC = () => {
@@ -62,8 +62,11 @@ export const SelectedWork: React.FC = () => {
                 <div className="w-[10vw] shrink-0" />
 
                 {projects.map((project, index) => (
-                    <div
+                    <a
                         key={project.id}
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="group relative w-[70vw] md:w-[40vw] shrink-0 flex flex-col gap-6 interactive cursor-none"
                         onMouseEnter={() => {
                             const video = videoRefs.current[index];
@@ -104,7 +107,7 @@ export const SelectedWork: React.FC = () => {
                             </div>
                             <span className="text-sm font-mono text-nordic-charcoal/40">{project.year}</span>
                         </div>
-                    </div>
+                    </a>
                 ))}
 
                 {/* Visual Line at the end - Now treated as a card */}

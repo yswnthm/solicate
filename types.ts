@@ -6,6 +6,7 @@ export interface Project {
   image: string;
   video?: string;
   aspectRatio?: string;
+  link?: string;
 }
 
 export interface JournalEntry {
