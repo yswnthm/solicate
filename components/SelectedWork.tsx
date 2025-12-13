@@ -6,11 +6,11 @@ import { Project } from '../types';
 gsap.registerPlugin(ScrollTrigger);
 
 const projects: Project[] = [
-    { id: 1, title: 'Amtams', role: 'Brand Identity', year: '2023', image: '/images/amtams-img.png', video: '/videos/amtams.mp4', aspectRatio: 'aspect-video' },
-    { id: 2, title: 'Chlorophyll', role: 'E-Commerce', year: '2023', image: '/images/chlorophyll-img.png', video: '/videos/chlorophyll.mp4', aspectRatio: 'aspect-video' },
-    { id: 3, title: 'Kajal', role: 'Digital Product', year: '2024', image: '/images/kajal-img.png', video: '/videos/kajal.mp4', aspectRatio: 'aspect-video' },
-    { id: 4, title: 'Kernelspace', role: 'System Design', year: '2024', image: '/images/kernelspace-img.png', video: '/videos/kernelspace.mp4', aspectRatio: 'aspect-video' },
-    { id: 5, title: 'Vaani', role: 'Product Design', year: '2024', image: '/images/vaani-img.png', video: '/videos/vaani.mp4', aspectRatio: 'aspect-video' },
+    { id: 1, title: 'Amtams', role: 'Hometreats Bakery Shop', year: '2023', image: '/images/amtams-img.png', video: '/videos/amtams.mp4', aspectRatio: 'aspect-video' },
+    { id: 2, title: 'Chlorophyll', role: 'Organic Laboratory', year: '2023', image: '/images/chlorophyll-img.png', video: '/videos/chlorophyll.mp4', aspectRatio: 'aspect-video' },
+    { id: 3, title: 'Kajal', role: 'UGC Portfolio', year: '2024', image: '/images/kajal-img.png', video: '/videos/kajal.mp4', aspectRatio: 'aspect-video' },
+    { id: 4, title: 'Kernelspace', role: 'Technical Lab', year: '2024', image: '/images/kernelspace-img.png', video: '/videos/kernelspace.mp4', aspectRatio: 'aspect-video' },
+    { id: 5, title: 'Vaani', role: 'Music Studio', year: '2024', image: '/images/vaani-img.png', video: '/videos/vaani.mp4', aspectRatio: 'aspect-video' },
 ];
 
 export const SelectedWork: React.FC = () => {
