@@ -4,6 +4,8 @@ export interface Project {
   role: string;
   year: string;
   image: string;
+  video?: string;
+  aspectRatio?: string;
 }
 
 export interface JournalEntry {
