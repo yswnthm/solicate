@@ -4,7 +4,7 @@ export interface Project {
   role: string;
   year: string;
   image: string;
-  video?: string;
+
   aspectRatio?: string;
   link?: string;
   playbackId?: string;

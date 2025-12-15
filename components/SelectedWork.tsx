@@ -7,11 +7,11 @@ import { Project } from '../types';
 gsap.registerPlugin(ScrollTrigger);
 
 const projects: Project[] = [
-    { id: 1, title: 'Amtams', role: 'Hometreats Bakery Shop', year: '2023', image: '/images/amtams-img.png', video: '/videos/amtamss.mp4', aspectRatio: 'aspect-video', link: 'https://amtams.solicate.pecup.in', playbackId: '6SzwPC3JhX023IB1Uy4k301qgBKvWqEVKYeEEatjKygeI' },
-    { id: 2, title: 'Chlorophyll', role: 'Organic Laboratory', year: '2023', image: '/images/chlorophyll-img.png', video: '/videos/chlorophylll.mp4', aspectRatio: 'aspect-video', link: 'https://chlorophyll.solicate.pecup.in', playbackId: 'Pzu8MmdZbCkG173BqyFv3DWSGtO02OrN02woMeGdvJRX8' },
-    { id: 3, title: 'Kajal', role: 'UGC Portfolio', year: '2024', image: '/images/kajal-img.png', video: '/videos/kajal.mp4', aspectRatio: 'aspect-video', link: 'https://kajal.solicate.pecup.in', playbackId: '9UTutoAr02u1oS02yDpS00ZfGfYlwSOaj02OtqzUXzzFnnQ' },
-    { id: 4, title: 'Kernelspace', role: 'Technical Lab', year: '2024', image: '/images/kernelspace-img.png', video: '/videos/kernelspace.mp4', aspectRatio: 'aspect-video', link: 'https://kernelspace.solicate.pecup.in', playbackId: 'VnfaCxXQPMQVNYoIGUDBYPVewBbqmuM00vksMSuhBXdw' },
-    { id: 5, title: 'Vaani', role: 'Music Studio', year: '2024', image: '/images/vaani-img.png', video: '/videos/vaani.mp4', aspectRatio: 'aspect-video', link: 'https://vaani.solicate.pecup.in', playbackId: '8RNpU01rebBYdeGxyUa52HJSPPDBfjQFJJHEv9KV00RgE' },
+    { id: 1, title: 'Amtams', role: 'Hometreats Bakery Shop', year: '2023', image: '/images/amtams-img.png', aspectRatio: 'aspect-video', link: 'https://amtams.solicate.pecup.in', playbackId: '6SzwPC3JhX023IB1Uy4k301qgBKvWqEVKYeEEatjKygeI' },
+    { id: 2, title: 'Chlorophyll', role: 'Organic Laboratory', year: '2023', image: '/images/chlorophyll-img.png', aspectRatio: 'aspect-video', link: 'https://chlorophyll.solicate.pecup.in', playbackId: 'Pzu8MmdZbCkG173BqyFv3DWSGtO02OrN02woMeGdvJRX8' },
+    { id: 3, title: 'Kajal', role: 'UGC Portfolio', year: '2024', image: '/images/kajal-img.png', aspectRatio: 'aspect-video', link: 'https://kajal.solicate.pecup.in', playbackId: '9UTutoAr02u1oS02yDpS00ZfGfYlwSOaj02OtqzUXzzFnnQ' },
+    { id: 4, title: 'Kernelspace', role: 'Technical Lab', year: '2024', image: '/images/kernelspace-img.png', aspectRatio: 'aspect-video', link: 'https://kernelspace.solicate.pecup.in', playbackId: 'VnfaCxXQPMQVNYoIGUDBYPVewBbqmuM00vksMSuhBXdw' },
+    { id: 5, title: 'Vaani', role: 'Music Studio', year: '2024', image: '/images/vaani-img.png', aspectRatio: 'aspect-video', link: 'https://vaani.solicate.pecup.in', playbackId: '8RNpU01rebBYdeGxyUa52HJSPPDBfjQFJJHEv9KV00RgE' },
 ];
 
 export const SelectedWork: React.FC = () => {
@@ -88,7 +88,7 @@ export const SelectedWork: React.FC = () => {
                     >
                         <div className={`relative ${project.aspectRatio || 'aspect-[4/3]'} overflow-hidden bg-faded-stone/20`}>
                             {/* Video Layer (Bottom) */}
-                            {project.playbackId ? (
+                            {project.playbackId && (
                                 <MuxPlayer
                                     playbackId={project.playbackId}
                                     metadata={{
@@ -105,22 +105,13 @@ export const SelectedWork: React.FC = () => {
                                     style={{ aspectRatio: '16/9', '--controls': 'none' } as React.CSSProperties} // Ensure aspect ratio matches
                                     ref={(el: any) => (videoRefs.current[index] = el)}
                                 />
-                            ) : project.video && (
-                                <video
-                                    ref={(el) => (videoRefs.current[index] = el)}
-                                    src={project.video}
-                                    muted
-                                    loop
-                                    playsInline
-                                    className="absolute inset-0 w-full h-full object-cover"
-                                />
                             )}
 
                             {/* Image Layer (Top) */}
                             <img
                                 src={project.image}
                                 alt={project.title}
-                                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${project.video ? 'group-hover:opacity-0' : 'group-hover:scale-105'}`}
+                                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${project.playbackId ? 'group-hover:opacity-0' : 'group-hover:scale-105'}`}
                             />
                         </div>
                         <div className="flex justify-between items-baseline border-t border-soft-pewter pt-4 transition-colors duration-300 group-hover:border-nordic-charcoal">
