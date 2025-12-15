@@ -17,7 +17,7 @@ export const Capabilities: React.FC = () => {
     };
 
     return (
-        <section className="relative py-24 px-6 md:px-24 bg-arctic-linen min-h-screen flex flex-col justify-center">
+        <section id="capabilities" className="relative py-24 px-6 md:px-24 bg-arctic-linen min-h-screen flex flex-col justify-center">
             <div className="absolute top-12 left-6 md:left-12 text-xs uppercase tracking-widest text-nordic-charcoal/50 z-20">
                 Capabilities
             </div>

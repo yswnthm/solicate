@@ -50,7 +50,7 @@ export const SelectedWork: React.FC = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="h-screen w-full overflow-hidden bg-arctic-linen flex items-center relative">
+        <section ref={containerRef} id="selected-work" className="h-screen w-full overflow-hidden bg-arctic-linen flex items-center relative">
             {/* Label */}
             <div className="absolute top-12 left-6 md:left-12 z-20">
                 <div className="text-xs uppercase tracking-widest text-nordic-charcoal/50">

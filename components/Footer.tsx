@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      setTime(now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Tokyo' }));
+      setTime(now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' }));
     };
     updateTime();
     const interval = setInterval(updateTime, 1000);
@@ -64,9 +64,9 @@ export const Footer: React.FC = () => {
           >
             <span className="text-[#EEECE7] uppercase tracking-widest text-[10px] opacity-40">Socials</span>
             <ul className="flex flex-col gap-1">
-              <li><a href="#" className="hover:text-[#A88C5D] transition-colors duration-300">Instagram</a></li>
-              <li><a href="#" className="hover:text-[#A88C5D] transition-colors duration-300">Twitter / X</a></li>
-              <li><a href="#" className="hover:text-[#A88C5D] transition-colors duration-300">LinkedIn</a></li>
+              <li><a href="https://instagram.com/yswnthm" target="_blank" rel="noopener noreferrer" className="hover:text-[#A88C5D] transition-colors duration-300">Instagram</a></li>
+              <li><a href="https://x.com/yswnth" target="_blank" rel="noopener noreferrer" className="hover:text-[#A88C5D] transition-colors duration-300">Twitter / X</a></li>
+              <li><a href="https://github.com/yswnthm" target="_blank" rel="noopener noreferrer" className="hover:text-[#A88C5D] transition-colors duration-300">Github</a></li>
             </ul>
           </div>
 
@@ -77,9 +77,10 @@ export const Footer: React.FC = () => {
           >
             <span className="text-[#EEECE7] uppercase tracking-widest text-[10px] opacity-40">Sitemap</span>
             <ul className="flex flex-col gap-1">
-              <li><a href="#" className="hover:text-[#A88C5D] transition-colors duration-300">Selected Work</a></li>
-              <li><a href="#" className="hover:text-[#A88C5D] transition-colors duration-300">Capabilities</a></li>
-              <li><a href="#" className="hover:text-[#A88C5D] transition-colors duration-300">Process</a></li>
+              <li><a href="#selected-work" className="hover:text-[#A88C5D] transition-colors duration-300">Selected Work</a></li>
+              <li><a href="#capabilities" className="hover:text-[#A88C5D] transition-colors duration-300">Capabilities</a></li>
+              <li><a href="#process" className="hover:text-[#A88C5D] transition-colors duration-300">Process</a></li>
+              <li><a href="#journal" className="hover:text-[#A88C5D] transition-colors duration-300">Journal</a></li>
             </ul>
           </div>
 
@@ -90,8 +91,8 @@ export const Footer: React.FC = () => {
           >
             <span className="text-[#EEECE7] uppercase tracking-widest text-[10px] opacity-40">Location</span>
             <div className="flex flex-col">
-              <span className="text-[#EEECE7]">Kyoto, Japan</span>
-              <span>35.0116° N, 135.7681° E</span>
+              <span className="text-[#EEECE7]">Mumbai, India</span>
+              <span>19.0760° N, 72.8777° E</span>
             </div>
           </div>
 
