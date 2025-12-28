@@ -5,11 +5,56 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
-    { label: 'Listen', desc: 'Deep immersion in the problem space.' },
-    { label: 'Define', desc: 'Isolating the core truth.' },
-    { label: 'Shape', desc: 'Exploration of form and function.' },
-    { label: 'Build', desc: 'Rigorous engineering.' },
-    { label: 'Refine', desc: 'Polishing until silence.' },
+    {
+        label: 'Listen',
+        desc: 'Deep immersion in the problem space.',
+        details: [
+            'Stakeholder Interviews',
+            'Market Analysis',
+            'User Empathy Mapping',
+            'Data Gathering'
+        ]
+    },
+    {
+        label: 'Define',
+        desc: 'Isolating the core truth.',
+        details: [
+            'Problem Statement',
+            'Success Metrics',
+            'Scope Bounding',
+            'Feasibility Check'
+        ]
+    },
+    {
+        label: 'Shape',
+        desc: 'Exploration of form and function.',
+        details: [
+            'Low-fidelity Wireframing',
+            'Architecture Design',
+            'User Journey Mapping',
+            'Design System Setup'
+        ]
+    },
+    {
+        label: 'Build',
+        desc: 'Rigorous engineering.',
+        details: [
+            'Component Development',
+            'API Integration',
+            'Performance Optimization',
+            'CI/CD Pipeline'
+        ]
+    },
+    {
+        label: 'Refine',
+        desc: 'Polishing until silence.',
+        details: [
+            'User Acceptance Testing',
+            'Accessibility Audit',
+            'Micro-interactions',
+            'Code Review & Cleanup'
+        ]
+    },
 ];
 
 export const Process: React.FC = () => {
@@ -180,6 +225,18 @@ export const Process: React.FC = () => {
                             `}>
                                 {step.desc}
                             </p>
+
+                            {/* Dropdown Details */}
+                            <ul className={`mt-3 space-y-1 overflow-hidden transition-all duration-500 ease-out origin-top
+                                ${activeStep === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100'}
+                            `}>
+                                {step.details.map((detail, i) => (
+                                    <li key={i} className="text-xs text-nordic-charcoal/50 flex items-center gap-2">
+                                        <span className="w-1 h-1 rounded-full bg-nordic-charcoal/30 flex-shrink-0" />
+                                        {detail}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     ))}
 
