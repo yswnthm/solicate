@@ -6,74 +6,74 @@ import { X } from 'lucide-react';
 const entries: JournalEntry[] = [
   {
     id: 'j1',
-    title: 'The Silence of Stone',
-    type: 'Essay',
-    date: 'Oct 12',
-    excerpt: 'Why permanence matters in a digital age.',
+    title: 'Digital Ecology',
+    type: 'Philosophy',
+    date: 'Dec 14',
+    excerpt: 'Building sustainable digital ecosystems that grow with your business.',
     content: (
       <>
-        <p className="mb-6">In an era of fleeting digital interactions, the permanence of stone serves as a grounding anchor. We look to historical architectures not just for aesthetic inspiration, but for their ability to withstand the test of time.</p>
-        <p className="mb-6">Stone speaks a language of patience. It demands to be shaped with intention, resisting the quick fixes of modern construction. In our digital products, we strive for this same sense of weight and longevity.</p>
-        <p>When we design interfaces, we ask ourselves: what is the digital equivalent of granite? How do we build systems that age gracefully, accumulating value rather than technical debt?</p>
+        <p className="mb-6">We view software not as static artifacts but as living organisms. A "launch" is merely a birth; the real work lies in nurturing the system as it interacts with real users and evolving market conditions.</p>
+        <p className="mb-6">Our approach to "Digital Ecology" prizes resilience over rigidity. We build component systems that can adapt, scale, and reconfigure themselves without crumbling under technical debt.</p>
+        <p>This mindset shifts the focus from "pixel perfection" to "systemic health," ensuring that your digital presence remains robust and relevant for years, not just weeks.</p>
       </>
     )
   },
   {
     id: 'j2',
-    title: 'Kyoto Morning',
-    type: 'Visual',
-    date: 'Oct 08',
-    image: 'https://picsum.photos/600/800?random=30',
+    title: 'The Craft of Motion',
+    type: 'Interaction',
+    date: 'Nov 28',
+    image: 'https://picsum.photos/600/800?random=40',
     content: (
       <>
-        <p className="mb-6">The light in Kyoto filters through washi paper, diffusing harsh realities into soft gradients. It is a reminder that clarity does not always mean sharpness.</p>
+        <p className="mb-6">Motion is often treated as garnish—sprinkled on at the end to make things "pop." At Solicate, we treat motion as a core material of the interface.</p>
         <div className="grid grid-cols-2 gap-4 my-8">
-          <img src="https://picsum.photos/400/600?random=101" className="w-full h-auto object-cover rounded-lg" />
-          <img src="https://picsum.photos/400/600?random=102" className="w-full h-auto object-cover rounded-lg mt-8" />
+          <img src="https://picsum.photos/400/600?random=110" className="w-full h-auto object-cover rounded-lg" />
+          <img src="https://picsum.photos/400/600?random=111" className="w-full h-auto object-cover rounded-lg mt-8" />
         </div>
-        <p>Our visual exploration this week focused on this interplay of shadow and light, attempting to capture the humidity and texture of a humid Japanese summer morning through color palettes and blur effects.</p>
+        <p>Meaningful transitions provide context. They explain where an element came from and where it's going. They reduce cognitive load by smoothing the mental gap between states. We choreograph every interaction to feel weightless yet substantial.</p>
       </>
     )
   },
   {
     id: 'j3',
-    title: 'Light as Material',
-    type: 'Essay',
-    date: 'Sep 29',
-    excerpt: 'Exploring the intangibles of spatial design.',
+    title: 'Beyond the Grid',
+    type: 'Design',
+    date: 'Nov 12',
+    excerpt: 'Breaking free from standard layouts to tell better stories.',
     content: (
       <>
-        <p className="mb-6">James Turrell teaches us that light is not just a way to see things, but a thing itself. In user interface design, we often treat light (brightness, emission) as a utility. What if we treated it as a material?</p>
-        <p>Manipulating the 'materiality' of screen luminescence allows us to create depth without skeuomorphism. It allows for a feeling of space within the flat glass rectangle.</p>
+        <p className="mb-6">The web has standardized around the 12-column grid. While effective, it can lead to a homogenization of experience. We strive to break the grid meaningfully—not for the sake of chaos, but to direct attention.</p>
+        <p>By contrasting rigid structure with organic placement, we create visual tension that guides the eye. It's about finding the balance between predictability (usability) and surprise (delight).</p>
       </>
     )
   },
   {
     id: 'j4',
-    title: 'Studio Process',
-    type: 'Visual',
-    date: 'Sep 15',
-    image: 'https://picsum.photos/600/800?random=31',
+    title: 'Engineering Trust',
+    type: 'Technology',
+    date: 'Nov 08',
+    image: 'https://picsum.photos/600/800?random=41',
     content: (
       <>
-        <p className="mb-6">A look behind the scenes at our latest sprint. Chaos, coffee, and unexpected breakthroughs.</p>
+        <p className="mb-6">Trust is the currency of the digital age. It is earned in milliseconds—by how fast a page loads, how securely data is handled, and how reliably a transaction completes.</p>
         <div className="aspect-video w-full overflow-hidden rounded-xl my-6 bg-gray-100">
-          <img src="https://picsum.photos/800/450?random=200" className="w-full h-full object-cover" />
+          <img src="https://picsum.photos/800/450?random=210" className="w-full h-full object-cover" />
         </div>
-        <p>We've begun to document our failures as meticulously as our successes. The discard pile often holds the seeds of our next great idea.</p>
+        <p>Our engineering standards are rigorous because we know that a broken link is a broken promise. We obsess over performance budgets, accessibility compliances, and secure architectures so your users can focus on your value, not your infrastructure.</p>
       </>
     )
   },
   {
     id: 'j5',
-    title: 'Future Artifacts',
-    type: 'Essay',
-    date: 'Aug 30',
-    excerpt: 'Designing for archeologists of the future.',
+    title: 'The Human Loop',
+    type: 'Strategy',
+    date: 'Nov 01',
+    excerpt: 'Why AI will never replace the empathy of a human designer.',
     content: (
       <>
-        <p className="mb-6">If the internet crashed tomorrow and never came back, what would remain of our work? Digital archeology is a fascinating thought experiment.</p>
-        <p>We are trying to design things that leave a trace. Not necessarily in code, but in culture. Memorable interactions are the artifacts of the 21st century.</p>
+        <p className="mb-6">As definitive artificial intelligence integrates into our workflows, the premium on human empathy skyrockets. We use AI to automate the mundane, liberating our minds to tackle the meaningful.</p>
+        <p>We design for humans, with humans. No algorithm can predict the subtle emotional response to a brand story or the cultural nuance of a campaign. We remain proudly, stubbornly human-centric.</p>
       </>
     )
   },
@@ -201,7 +201,7 @@ export const Journal: React.FC = () => {
 
           <div className="hidden md:block">
             <p className="font-sans-ui text-sm text-[#2E2E2E]/60 max-w-xs">
-              A collection of essays, rapid experiments, and visual notes from our studio practice.
+              A collection of essays, rapid experiments, and visual notes from our agency practice.
             </p>
           </div>
         </div>
