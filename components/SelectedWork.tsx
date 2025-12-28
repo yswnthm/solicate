@@ -62,14 +62,30 @@ const projects: Project[] = [
 
 const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
     const videoRef = useRef<any>(null);
+    const timeoutRef = useRef<any>(null);
+    const [isPlaying, setIsPlaying] = React.useState(false);
 
     const handleMouseEnter = () => {
-        if (videoRef.current?.play) {
-            videoRef.current.play();
-        }
+        // Clear any existing timeout just in case
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+        // Set delay before playing
+        timeoutRef.current = setTimeout(() => {
+            if (videoRef.current?.play) {
+                setIsPlaying(true);
+                videoRef.current.play();
+            }
+        }, 3500);
     };
 
     const handleMouseLeave = () => {
+        // Cancel play if mouse leaves before timeout
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+            timeoutRef.current = null;
+        }
+
+        setIsPlaying(false);
         if (videoRef.current?.pause) {
             videoRef.current.pause();
             if (videoRef.current.currentTime) {
@@ -80,8 +96,11 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
 
     return (
         <div
-            className="sticky top-24 w-full flex justify-center pb-24"
-            style={{ zIndex: index + 1 }}
+            className="sticky w-full flex justify-center pb-24"
+            style={{
+                zIndex: index + 1,
+                top: `calc(6rem + ${index * 1.5}rem)`
+            }}
         >
             <a
                 href={project.link}
@@ -116,7 +135,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
                     <img
                         src={project.image}
                         alt={project.title}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${project.playbackId ? 'group-hover:opacity-0' : 'group-hover:scale-105 transition-transform'}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${isPlaying ? 'opacity-0' : 'opacity-100 group-hover:scale-105 transition-transform'}`}
                     />
                 </div>
 
@@ -152,31 +171,11 @@ export const SelectedWork: React.FC = () => {
                 </h2>
             </div>
 
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center pb-24">
                 {projects.map((project, index) => (
                     <ProjectCard key={project.id} project={project} index={index} />
                 ))}
 
-                {/* 'Add Yours' Card */}
-                <div
-                    className="sticky top-24 w-full flex justify-center pb-24"
-                    style={{ zIndex: projects.length + 1 }}
-                >
-                    <div className="w-full md:w-[70vw] lg:w-[60vw] aspect-[16/9] bg-[#EEECE7] rounded-md border border-dashed border-nordic-charcoal/20 flex flex-col items-center justify-center gap-6 group cursor-pointer transition-colors hover:border-nordic-charcoal/40">
-                        <svg width="220" height="48" className="overflow-visible">
-                            <line x1="0" y1="24" x2="180" y2="24" className="stroke-nordic-charcoal/30 stroke-1" />
-                            <circle cx="186" cy="24" r="6" className="fill-transparent stroke-nordic-charcoal/30 stroke-1" />
-                            <circle
-                                cx="186" cy="24" r="24"
-                                style={{ transformOrigin: '186px 24px' }}
-                                className="fill-birchwood/20 scale-0 opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100"
-                            />
-                        </svg>
-                        <span className="font-display text-xl text-nordic-charcoal/40 italic transition-colors duration-300 group-hover:text-nordic-charcoal/80">
-                            Add Yours here :D
-                        </span>
-                    </div>
-                </div>
             </div>
         </section>
     );
