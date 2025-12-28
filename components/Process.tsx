@@ -42,8 +42,7 @@ export const Process: React.FC = () => {
                 onUpdate: function () {
                     // Calculate active step based on timeline progress
                     const progress = this.progress();
-                    // Use nearest neighbor to determine active step
-                    // This creates a "zone" around each step where it is active
+                    // Map progress to step indices (0 to 4)
                     const index = Math.round(progress * (steps.length - 1));
                     setActiveStep(index);
                 }
@@ -60,6 +59,7 @@ export const Process: React.FC = () => {
             dotsRef.current.forEach((dot, index) => {
                 if (!dot) return;
 
+                // Calculate precise trigger point based on step index
                 const startPos = index / (steps.length - 1 || 1);
 
                 // Animate dot scale/opacity
@@ -71,7 +71,7 @@ export const Process: React.FC = () => {
                         duration: 0.1, // Quick pop in
                         ease: "back.out(1.7)"
                     },
-                    startPos * 0.9
+                    Math.max(0, startPos - 0.05) // Trigger slightly before the line hits the exact center
                 );
             });
 
@@ -80,6 +80,15 @@ export const Process: React.FC = () => {
         return () => ctx.revert();
     }, []);
 
+    // Define the Y-offsets for each step to match the sine wave
+    // Path: M 0,300 C 150,300 150,100 300,100 S 450,300 600,300 S 750,500 900,500 S 1050,300 1200,300
+    // Visual Y coordinates: 
+    // Step 0: 300 (0 offset)
+    // Step 1: 100 (-200 offset)
+    // Step 2: 300 (0 offset)
+    // Step 3: 500 (+200 offset)
+    // Step 4: 300 (0 offset)
+
     return (
         <div ref={trackRef} className="relative h-[300vh]">
             <section ref={containerRef} className="sticky top-0 h-screen py-32 px-6 md:px-24 bg-arctic-linen flex flex-col items-center justify-center relative overflow-hidden">
@@ -87,22 +96,32 @@ export const Process: React.FC = () => {
                     Process
                 </div>
 
-                <div className="relative w-full max-w-5xl h-[80vh] flex flex-col md:flex-row justify-between items-center">
+                <div className="relative w-full max-w-6xl h-[600px] flex flex-col md:flex-row justify-between items-center z-10">
 
                     {/* SVG Path Background */}
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none visible md:invisible" preserveAspectRatio="none">
+                    <svg
+                        className="absolute inset-x-0 top-0 w-full h-full pointer-events-none visible md:invisible"
+                        preserveAspectRatio="none"
+                    >
                         {/* Vertical line for mobile */}
                         <line x1="50%" y1="0" x2="50%" y2="100%" stroke="#E1E0DC" strokeWidth="1" />
                     </svg>
 
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none invisible md:visible">
-                        {/* Horizontal wavy line for desktop */}
+                    <svg
+                        className="absolute inset-0 w-full h-full pointer-events-none invisible md:visible"
+                        viewBox="0 0 1200 600"
+                        preserveAspectRatio="xMidYMid meet"
+                    >
+                        {/* 
+                           Sine wave path passing through:
+                           (0,300) -> (300,100) -> (600,300) -> (900,500) -> (1200,300)
+                        */}
                         <path
                             ref={lineRef}
-                            d="M 0,300 C 200,300 200,100 400,100 S 600,500 800,500 S 1100,300 1200,300"
+                            d="M 0,300 C 150,300 150,100 300,100 S 450,300 600,300 S 750,500 900,500 S 1050,300 1200,300"
                             fill="none"
                             stroke="#1F1F1F"
-                            strokeWidth="1"
+                            strokeWidth="1.5"
                             className="w-full"
                             vectorEffect="non-scaling-stroke"
                         />
@@ -111,26 +130,39 @@ export const Process: React.FC = () => {
                     {steps.map((step, index) => (
                         <div
                             key={index}
-                            className="relative z-10 flex flex-col items-center md:items-start group w-64 text-center md:text-left my-8 md:my-0"
+                            className="relative flex flex-col items-center md:items-start group w-48 text-center md:text-left my-8 md:my-0"
                             style={{
-                                marginTop: (() => {
-                                    if (index === 1) return '-160px'; // Define: Even higher
-                                    if (index === 2) return '-370px'; // Shape: Even higher
-                                    return index % 2 === 0 ? '0' : '200px';
+                                transform: (() => {
+                                    // Match the Y-coordinates of the SVG path
+                                    // Center is 300. 
+                                    // 100 is -200px (Up)
+                                    // 500 is +200px (Down)
+
+                                    // Mobile reset
+                                    if (typeof window !== 'undefined' && window.innerWidth < 768) return 'none';
+
+                                    switch (index) {
+                                        case 0: return 'translateY(0px)';    // Y=300
+                                        case 1: return 'translateY(-200px)'; // Y=100
+                                        case 2: return 'translateY(0px)';    // Y=300
+                                        case 3: return 'translateY(200px)';  // Y=500
+                                        case 4: return 'translateY(0px)';    // Y=300
+                                        default: return 'none';
+                                    }
                                 })(),
                             }}
                         >
                             {/* The Dot */}
                             <div className="relative mb-4 md:mb-6 flex justify-center md:justify-start w-full">
-                                <svg width="12" height="12" className="overflow-visible">
+                                <svg width="14" height="14" className="overflow-visible">
                                     <circle
                                         ref={(el) => { dotsRef.current[index] = el; }}
-                                        cx="6" cy="6" r="4"
+                                        cx="7" cy="7" r="5"
                                         className="fill-arctic-linen stroke-nordic-charcoal stroke-2"
                                     />
                                     {/* Pulse effect */}
                                     <circle
-                                        cx="6" cy="6" r="12"
+                                        cx="7" cy="7" r="14"
                                         className={`fill-birchwood/20 scale-0 opacity-0 transition-all duration-500 origin-center
                                             ${activeStep === index ? 'scale-100 opacity-100' : 'group-hover:scale-100 group-hover:opacity-100'}
                                         `}
@@ -143,7 +175,7 @@ export const Process: React.FC = () => {
                             `}>
                                 {step.label}
                             </h3>
-                            <p className={`text-sm text-nordic-charcoal/60 font-light translate-y-2 transition-all duration-500
+                            <p className={`text-sm text-nordic-charcoal/60 font-light translate-y-2 transition-all duration-500 line-clamp-2
                                 ${activeStep === index ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 group-hover:translate-y-0'}
                             `}>
                                 {step.desc}
