@@ -54,11 +54,14 @@ export const Hero: React.FC = () => {
 
       {/* Scroll indicator */}
       <div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
         style={{
           opacity: "calc(1 - (var(--scroll) / 300))",
         }}
       >
+        <p className="font-sans-ui text-[10px] uppercase tracking-[0.2em] text-[#2E2E2E]/60">
+          Scroll to Enter
+        </p>
         <div className="w-[1px] h-12 bg-[#2E2E2E]/20 overflow-hidden relative">
           <div className="absolute top-0 w-full h-1/2 bg-[#2E2E2E] animate-scroll-line" />
         </div>
