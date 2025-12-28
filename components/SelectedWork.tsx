@@ -1,10 +1,6 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import MuxPlayer from "@mux/mux-player-react";
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Project } from '../types';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const projects: Project[] = [
     {
@@ -64,8 +60,8 @@ const projects: Project[] = [
     },
 ];
 
-const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
-    const videoRef = useRef<any>(null); // Using any for MuxPlayer ref compatibility
+const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
+    const videoRef = useRef<any>(null);
 
     const handleMouseEnter = () => {
         if (videoRef.current?.play) {
@@ -83,132 +79,105 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
     };
 
     return (
-        <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative w-[70vw] md:w-[40vw] shrink-0 flex flex-col gap-6 interactive cursor-none hover-trigger"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+        <div
+            className="sticky top-24 w-full flex justify-center pb-24"
+            style={{ zIndex: index + 1 }}
         >
-            <div className={`relative ${project.aspectRatio || 'aspect-[4/3]'} overflow-hidden bg-faded-stone/20 rounded-sm`}>
-                {/* Video Layer (Bottom) */}
-                {project.playbackId && (
-                    <MuxPlayer
-                        playbackId={project.playbackId}
-                        metadata={{
-                            video_id: `video-${project.id}`,
-                            video_title: project.title,
-                            viewer_user_id: "user-id-007",
-                        }}
-                        streamType="on-demand"
-                        autoPlay={false}
-                        controls={false}
-                        muted
-                        loop
-                        className="absolute inset-0 w-full h-full object-cover"
-                        style={{ aspectRatio: '16/9', '--controls': 'none' } as React.CSSProperties}
-                        ref={videoRef}
-                    />
-                )}
-
-                {/* Image Layer (Top) */}
-                <img
-                    src={project.image}
-                    alt={project.title}
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${project.playbackId ? 'group-hover:opacity-0' : 'group-hover:scale-105 transition-transform'}`}
-                />
-            </div>
-            <div className="flex justify-between items-start border-t border-soft-pewter pt-4 transition-colors duration-300 group-hover:border-nordic-charcoal">
-                <div className="max-w-[80%]">
-                    <h3
-                        className="font-display text-lg md:text-xl text-nordic-charcoal inline-block mr-3"
-                        data-cursor-variant="project-name"
-                    >
-                        {project.title}
-                    </h3>
-                    <span className="text-sm text-nordic-charcoal/60 block mb-2">{project.role}</span>
-                    {project.description && (
-                        <p className="text-xs md:text-sm text-nordic-charcoal/50 leading-relaxed max-w-md">
-                            {project.description}
-                        </p>
+            <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative w-full md:w-[70vw] lg:w-[60vw] bg-[#EEECE7] rounded-md overflow-hidden border border-black/5 shadow-sm transition-transform duration-500 hover:scale-[1.01]"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
+                <div className={`relative ${project.aspectRatio || 'aspect-[16/9]'} overflow-hidden bg-faded-stone/20`}>
+                    {/* Video Layer */}
+                    {project.playbackId && (
+                        <MuxPlayer
+                            playbackId={project.playbackId}
+                            metadata={{
+                                video_id: `video-${project.id}`,
+                                video_title: project.title,
+                                viewer_user_id: "user-id-007",
+                            }}
+                            streamType="on-demand"
+                            autoPlay={false}
+                            controls={false}
+                            muted
+                            loop
+                            className="absolute inset-0 w-full h-full object-cover"
+                            style={{ aspectRatio: '16/9', '--controls': 'none' } as React.CSSProperties}
+                            ref={videoRef}
+                        />
                     )}
+
+                    {/* Image Layer */}
+                    <img
+                        src={project.image}
+                        alt={project.title}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${project.playbackId ? 'group-hover:opacity-0' : 'group-hover:scale-105 transition-transform'}`}
+                    />
                 </div>
-                <span className="text-sm font-mono text-nordic-charcoal/40">{project.year}</span>
-            </div>
-        </a>
+
+                <div className="p-8 flex flex-col md:flex-row justify-between items-start gap-6 bg-[#EEECE7]">
+                    <div className="max-w-md">
+                        <div className="flex items-center gap-3 mb-2">
+                            <h3 className="font-display text-2xl text-nordic-charcoal">{project.title}</h3>
+                            <div className="h-px flex-1 bg-nordic-charcoal/10 min-w-[20px]" />
+                        </div>
+                        <span className="text-sm font-medium text-nordic-charcoal/70 block mb-3">{project.role}</span>
+                        {project.description && (
+                            <p className="text-sm text-nordic-charcoal/60 leading-relaxed">
+                                {project.description}
+                            </p>
+                        )}
+                    </div>
+                    <span className="text-sm font-mono text-nordic-charcoal/40 pt-1">{project.year}</span>
+                </div>
+            </a>
+        </div>
     );
 };
 
 export const SelectedWork: React.FC = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const trackRef = useRef<HTMLDivElement>(null);
-
-    useLayoutEffect(() => {
-        const ctx = gsap.context(() => {
-            const track = trackRef.current;
-            const container = containerRef.current;
-            if (!track || !container) return;
-
-            // Calculate movement amount: total width of track minus viewport width
-            // We scroll horizontally by this amount
-            const getScrollAmount = () => -(track.scrollWidth - window.innerWidth);
-
-            gsap.to(track, {
-                x: getScrollAmount,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: container,
-                    start: 'top top',
-                    // The duration of the scroll is pinned to the distance we need to travel + some buffer
-                    end: () => `+=${track.scrollWidth - window.innerWidth + 200}`,
-                    pin: true,
-                    scrub: 1,
-                    invalidateOnRefresh: true,
-                },
-            });
-        }, containerRef);
-
-        return () => ctx.revert();
-    }, []);
-
     return (
-        <section ref={containerRef} id="selected-work" className="h-screen w-full overflow-hidden bg-arctic-linen flex items-center relative">
-            {/* Label */}
-            <div className="absolute top-12 left-6 md:left-12 z-20">
-                <div className="text-xs uppercase tracking-widest text-nordic-charcoal/50">
+        <section id="selected-work" className="w-full bg-arctic-linen py-24 px-6 md:px-12 relative">
+            <div className="max-w-7xl mx-auto mb-20">
+                <div className="text-xs uppercase tracking-widest text-nordic-charcoal/50 mb-4">
                     Selected Work (01—{String(projects.length).padStart(2, '0')})
                 </div>
+                <h2 className="font-display text-4xl md:text-5xl text-nordic-charcoal max-w-2xl leading-tight">
+                    Projects that define our approach to clarity and craft.
+                </h2>
             </div>
 
-            <div ref={trackRef} className="flex gap-12 md:gap-24 px-12 md:px-24 w-max h-full items-center">
-                {/* Intro Spacer */}
-                <div className="w-[5vw] md:w-[10vw] shrink-0" />
-
-                {projects.map((project) => (
-                    <ProjectCard key={project.id} project={project} />
+            <div className="flex flex-col items-center">
+                {projects.map((project, index) => (
+                    <ProjectCard key={project.id} project={project} index={index} />
                 ))}
 
                 {/* 'Add Yours' Card */}
-                <div className="w-[70vw] md:w-[40vw] shrink-0 flex items-center justify-center gap-6 group cursor-pointer relative">
-                    <svg width="220" height="48" className="overflow-visible">
-                        <line x1="0" y1="24" x2="180" y2="24" className="stroke-nordic-charcoal/30 stroke-1" />
-                        <circle cx="186" cy="24" r="6" className="fill-transparent stroke-nordic-charcoal/30 stroke-1" />
-                        <circle
-                            cx="186" cy="24" r="24"
-                            style={{ transformOrigin: '186px 24px' }}
-                            className="fill-birchwood/20 scale-0 opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100"
-                        />
-                    </svg>
-                    <span className="font-display text-xl text-nordic-charcoal/40 italic transition-colors duration-300 group-hover:text-nordic-charcoal/80">
-                        Add Yours here :D
-                    </span>
+                <div
+                    className="sticky top-24 w-full flex justify-center pb-24"
+                    style={{ zIndex: projects.length + 1 }}
+                >
+                    <div className="w-full md:w-[70vw] lg:w-[60vw] aspect-[16/9] bg-[#EEECE7] rounded-md border border-dashed border-nordic-charcoal/20 flex flex-col items-center justify-center gap-6 group cursor-pointer transition-colors hover:border-nordic-charcoal/40">
+                        <svg width="220" height="48" className="overflow-visible">
+                            <line x1="0" y1="24" x2="180" y2="24" className="stroke-nordic-charcoal/30 stroke-1" />
+                            <circle cx="186" cy="24" r="6" className="fill-transparent stroke-nordic-charcoal/30 stroke-1" />
+                            <circle
+                                cx="186" cy="24" r="24"
+                                style={{ transformOrigin: '186px 24px' }}
+                                className="fill-birchwood/20 scale-0 opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100"
+                            />
+                        </svg>
+                        <span className="font-display text-xl text-nordic-charcoal/40 italic transition-colors duration-300 group-hover:text-nordic-charcoal/80">
+                            Add Yours here :D
+                        </span>
+                    </div>
                 </div>
-
-                {/* Outro Spacer */}
-                <div className="w-[20vw] shrink-0" />
             </div>
         </section>
     );
 };
-
