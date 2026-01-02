@@ -64,9 +64,9 @@ export const Footer: React.FC = () => {
           >
             <span className="text-[#EEECE7] uppercase tracking-widest text-[10px] opacity-40">Socials</span>
             <ul className="flex flex-col gap-1">
-              <li><a href="https://instagram.com/yswnthm" target="_blank" rel="noopener noreferrer" className="hover:text-[#A88C5D] transition-colors duration-300">Instagram</a></li>
-              <li><a href="https://x.com/yswnth" target="_blank" rel="noopener noreferrer" className="hover:text-[#A88C5D] transition-colors duration-300">Twitter / X</a></li>
-              <li><a href="https://github.com/yswnthm" target="_blank" rel="noopener noreferrer" className="hover:text-[#A88C5D] transition-colors duration-300">Github</a></li>
+              <li><a href="https://instagram.com/solicate.in" target="_blank" rel="noopener noreferrer" className="hover:text-[#A88C5D] transition-colors duration-300">Instagram</a></li>
+              <li><a href="https://x.com/solicatetwt" target="_blank" rel="noopener noreferrer" className="hover:text-[#A88C5D] transition-colors duration-300">Twitter / X</a></li>
+              <li><a href="https://cal.com/solicate" target="_blank" rel="noopener noreferrer" className="hover:text-[#A88C5D] transition-colors duration-300">Book a Call</a></li>
             </ul>
           </div>
 
