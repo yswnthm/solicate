@@ -103,7 +103,7 @@ export const Footer: React.FC = () => {
           >
             <span className="text-[#EEECE7] uppercase tracking-widest text-[10px] opacity-40">Local Time</span>
             <p className="font-variant-numeric tabular-nums text-[#A88C5D] text-lg">{time}</p>
-            <p className="text-[10px] uppercase tracking-widest opacity-40 mt-4 md:mt-auto">© 2025 Solicate. All Rights Reserved.</p>
+            <p className="text-[10px] uppercase tracking-widest opacity-40 mt-4 md:mt-auto">© 2026 Solicate. All Rights Reserved.</p>
           </div>
 
         </div>
