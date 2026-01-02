@@ -32,7 +32,7 @@ const projects: Project[] = [
         year: '2025',
         image: '/images/kajal-img.png',
         aspectRatio: 'aspect-video',
-        link: 'https://kajal.solicate.pecup.in',
+        link: 'https://kajal.solicate.in',
         playbackId: '9UTutoAr02u1oS02yDpS00ZfGfYlwSOaj02OtqzUXzzFnnQ',
         description: 'A dynamic portfolio showcasing user-generated content with a focus on bold typography and fluid transitions.'
     },
