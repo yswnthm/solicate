@@ -11,12 +11,14 @@ const Word = ({
     children,
     progress,
     range,
-    highlight
+    highlight,
+    forceStatic
 }: {
     children: string;
     progress: MotionValue<number>;
     range: [number, number];
     highlight?: boolean;
+    forceStatic?: boolean;
 }) => {
     const opacity = useTransform(progress, range, [0, 1]);
     const blur = useTransform(progress, range, [10, 0]);

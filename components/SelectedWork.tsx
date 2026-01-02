@@ -61,6 +61,15 @@ const projects: Project[] = [
 ];
 
 const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
+    const [isMobile, setIsMobile] = React.useState(true);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     const videoRef = useRef<any>(null);
     const timeoutRef = useRef<any>(null);
     const [isPlaying, setIsPlaying] = React.useState(false);
@@ -96,10 +105,10 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
 
     return (
         <div
-            className="sticky w-full flex justify-center pb-24"
+            className="w-full flex justify-center pb-12 md:pb-24 md:sticky"
             style={{
                 zIndex: index + 1,
-                top: `calc(6rem + ${index * 1.5}rem)`
+                top: isMobile ? 'auto' : `calc(6rem + ${index * 1.5}rem)`
             }}
         >
             <a

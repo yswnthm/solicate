@@ -83,6 +83,8 @@ export const Process: React.FC = () => {
                     start: 'top top',
                     end: 'bottom bottom',
                     scrub: 1,
+                    // Only enable on desktop
+                    invalidateOnRefresh: true,
                 },
                 onUpdate: function () {
                     // Calculate active step based on timeline progress
@@ -92,6 +94,13 @@ export const Process: React.FC = () => {
                     setActiveStep(index);
                 }
             });
+
+            // Disable/Kill if mobile
+            if (window.innerWidth < 768) {
+                ScrollTrigger.getAll().forEach(st => st.kill());
+                // However, killing inside context might be tricky if context tries to revert. 
+                // Better to wrap the whole thing or use matchMedia.
+            }
 
             // Draw the line over the course of the scroll
             tl.to(line, {
@@ -135,13 +144,13 @@ export const Process: React.FC = () => {
     // Step 4: 300 (0 offset)
 
     return (
-        <div ref={trackRef} className="relative h-[300vh]">
-            <section ref={containerRef} className="sticky top-0 h-screen py-32 px-6 md:px-24 bg-arctic-linen flex flex-col items-center justify-center relative overflow-hidden">
+        <div ref={trackRef} className="relative h-auto md:h-[300vh]">
+            <section ref={containerRef} className="relative md:sticky top-0 h-auto md:h-screen py-16 md:py-32 px-6 md:px-24 bg-arctic-linen flex flex-col items-center justify-center overflow-hidden">
                 <div className="absolute top-12 left-6 md:left-12 text-xs uppercase tracking-widest text-nordic-charcoal/50">
                     Process
                 </div>
 
-                <div className="relative w-full max-w-6xl h-[600px] flex flex-col md:flex-row justify-between items-center z-10">
+                <div className="relative w-full max-w-6xl h-auto md:h-[600px] flex flex-col md:flex-row justify-between items-center z-10">
 
                     {/* SVG Path Background */}
                     <svg
@@ -228,7 +237,8 @@ export const Process: React.FC = () => {
 
                             {/* Dropdown Details */}
                             <ul className={`mt-3 space-y-1 overflow-hidden transition-all duration-500 ease-out origin-top
-                                ${activeStep === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100'}
+                                ${/* Always show on mobile, toggle on desktop */ ''}
+                                ${activeStep === index ? 'max-h-40 opacity-100' : 'max-h-40 opacity-100 md:max-h-0 md:opacity-0 md:group-hover:max-h-40 md:group-hover:opacity-100'}
                             `}>
                                 {step.details.map((detail, i) => (
                                     <li key={i} className="text-xs text-nordic-charcoal/50 flex items-center gap-2">

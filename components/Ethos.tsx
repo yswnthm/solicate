@@ -21,8 +21,15 @@ export const Ethos: React.FC<EthosProps> = ({
   const words = text.split(" ");
 
   return (
-    <div ref={trackRef} className="relative h-[200vh]">
-      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-[#EEECE7]">
+    <div ref={trackRef} className="relative h-auto md:h-[200vh]">
+      <style>{`
+        @media (max-width: 768px) {
+            .force-visible-ethos {
+                opacity: 1 !important;
+            }
+        }
+      `}</style>
+      <div className="relative md:sticky top-0 h-auto md:h-screen flex items-center justify-center overflow-hidden bg-[#EEECE7]">
         <div className="absolute top-12 left-6 md:left-12 text-xs uppercase tracking-widest text-nordic-charcoal/50 z-20">
           Ethos
         </div>
@@ -45,8 +52,11 @@ export const Ethos: React.FC<EthosProps> = ({
                   <span className="absolute inset-0 text-[#2E2E2E]/10 select-none">{word}</span>
 
                   <motion.span
-                    style={{ opacity, color: shouldHighlight ? highlightColor : "#2E2E2E" }}
-                    className="relative"
+                    style={{
+                      opacity,
+                      color: shouldHighlight ? highlightColor : "#2E2E2E"
+                    }}
+                    className="relative force-visible-ethos"
                   >
                     {word}
                   </motion.span>
