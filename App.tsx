@@ -12,6 +12,7 @@ import { Footer } from './components/Footer';
 import { CustomCursor } from './components/CustomCursor';
 import { Ethos } from './components/Ethos';
 import { Principles } from './components/Principles';
+import { OtherWork } from './components/OtherWork';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,6 +63,7 @@ function App() {
           highlightColor="#D35400"
         />
         <Process />
+        <OtherWork />
         <Journal />
       </main>
 
