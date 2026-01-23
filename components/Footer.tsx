@@ -68,7 +68,7 @@ export const Footer: React.FC = () => {
                     <div className="flex flex-col gap-1">
                       {[
                         { label: 'Book a call', href: 'https://cal.com/solicate', icon: Phone },
-                        { label: 'Send a mail', href: 'mailto:mail@solicate.in', icon: Mail },
+                        { label: 'Send a mail', href: 'mailto:solicate.team@gmail.com', icon: Mail },
                         { label: 'Send a dm', href: 'https://instagram.com/solicate.in', icon: Instagram }
                       ].map((option, idx) => (
                         <a

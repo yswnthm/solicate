@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { Instagram, Mail } from "lucide-react";
 
 export const Hero: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -50,6 +51,30 @@ export const Hero: React.FC = () => {
         <p className="mt-8 font-sans-ui text-[#2E2E2E] tracking-[0.2em] text-sm uppercase opacity-60">
           Experiential Creative Studio
         </p>
+
+        {/* Social Links */}
+        <div className="mt-12 flex items-center gap-8">
+          <a
+            href="https://instagram.com/solicate.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3 text-[#2E2E2E]/60 hover:text-[#2E2E2E] transition-colors duration-300"
+          >
+            <Instagram strokeWidth={1.5} size={20} />
+            <span className="font-sans-ui text-[10px] uppercase tracking-[0.2em] max-w-0 opacity-0 group-hover:max-w-[100px] group-hover:opacity-100 transition-all duration-500 overflow-hidden whitespace-nowrap">
+              Instagram
+            </span>
+          </a>
+          <a
+            href="mailto:solicate.team@gmail.com"
+            className="group flex items-center gap-3 text-[#2E2E2E]/60 hover:text-[#2E2E2E] transition-colors duration-300"
+          >
+            <Mail strokeWidth={1.5} size={20} />
+            <span className="font-sans-ui text-[10px] uppercase tracking-[0.2em] max-w-0 opacity-0 group-hover:max-w-[100px] group-hover:opacity-100 transition-all duration-500 overflow-hidden whitespace-nowrap">
+              Email
+            </span>
+          </a>
+        </div>
       </div>
 
       {/* Scroll indicator */}
@@ -66,6 +91,8 @@ export const Hero: React.FC = () => {
           <div className="absolute top-0 w-full h-1/2 bg-[#2E2E2E] animate-scroll-line" />
         </div>
       </div>
+
+
       <style jsx>{`
         @keyframes scroll-line {
           0% {
