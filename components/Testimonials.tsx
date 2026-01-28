@@ -35,9 +35,21 @@ const TestimonialRow: React.FC<{
                                 className="w-8 h-8 rounded-full object-cover grayscale opacity-60 group-hover:opacity-100 transition-opacity duration-300"
                             />
                         )}
-                        <p className="font-sans-ui text-sm text-[#2E2E2E]/70 font-medium uppercase tracking-wider">
-                            — {testimonial.author}
-                        </p>
+                        {testimonial.instagram ? (
+                            <a
+                                href={testimonial.instagram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="font-sans-ui text-sm text-[#2E2E2E]/70 font-medium uppercase tracking-wider hover:text-[#A88C5D] transition-colors duration-300"
+                            >
+                                — {testimonial.author}
+                            </a>
+                        ) : (
+                            <p className="font-sans-ui text-sm text-[#2E2E2E]/70 font-medium uppercase tracking-wider">
+                                — {testimonial.author}
+                            </p>
+                        )}
                     </div>
                 </div>
             </div>
@@ -71,36 +83,63 @@ const TestimonialOverlay: React.FC<{ testimonial: Testimonial; onClose: () => vo
                 exit={{ x: '100%' }}
                 transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                 onClick={(e) => e.stopPropagation()}
-                className="w-full md:w-[50vw] h-full bg-[#EEECE7] shadow-2xl p-8 md:p-16 flex flex-col relative justify-center"
+                data-lenis-prevent
+                className="w-full md:w-[50vw] h-full bg-[#EEECE7] shadow-2xl flex flex-col relative"
             >
                 <button
                     onClick={onClose}
-                    className="absolute top-8 right-8 p-2 rounded-full hover:bg-black/5 transition-colors"
+                    className="absolute top-8 right-8 p-2 rounded-full hover:bg-black/5 transition-colors z-10"
                 >
                     <X size={24} className="text-[#2E2E2E]" />
                 </button>
 
-                <div className="max-w-xl">
-                    <div className="mb-12">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className="text-[#A88C5D]/20 mb-8">
-                            <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.01697 21L5.01697 18C5.01697 16.8954 5.9124 16 7.01697 16H10.017C10.5693 16 11.017 15.5523 11.017 15V9C11.017 8.44772 10.5693 8 10.017 8H6.01697C5.46468 8 5.01697 8.44772 5.01697 9V11C5.01697 11.5523 4.56925 12 4.01697 12H3.01697V5H13.017V15C13.017 18.3137 10.3307 21 7.01697 21H5.01697Z" fill="currentColor" />
-                        </svg>
-                        <h2 className="font-serif-display text-3xl md:text-5xl text-[#2E2E2E] leading-tight">
-                            "{testimonial.quote}"
-                        </h2>
-                    </div>
+                <div className="flex-1 overflow-y-auto p-8 md:p-16 overscroll-contain">
+                    <div className="max-w-xl min-h-full flex flex-col justify-center my-auto">
+                        <div className="mb-12">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className="text-[#A88C5D]/20 mb-8">
+                                <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.01697 21L5.01697 18C5.01697 16.8954 5.9124 16 7.01697 16H10.017C10.5693 16 11.017 15.5523 11.017 15V9C11.017 8.44772 10.5693 8 10.017 8H6.01697C5.46468 8 5.01697 8.44772 5.01697 9V11C5.01697 11.5523 4.56925 12 4.01697 12H3.01697V5H13.017V15C13.017 18.3137 10.3307 21 7.01697 21H5.01697Z" fill="currentColor" />
+                            </svg>
+                            <h2 className="font-serif-display text-3xl md:text-5xl text-[#2E2E2E] leading-tight">
+                                "{testimonial.quote}"
+                            </h2>
+                        </div>
 
-                    <div className="flex items-center gap-6 border-t border-[#2E2E2E]/10 pt-8">
-                        {testimonial.image && (
-                            <img src={testimonial.image} alt={testimonial.author} className="w-20 h-20 rounded-full object-cover" />
+                        {testimonial.feedbacks && testimonial.feedbacks.length > 0 && (
+                            <div className="space-y-6 mb-12">
+                                <h3 className="font-sans-ui text-xs text-[#2E2E2E]/40 uppercase tracking-widest">Detailed Conversation</h3>
+                                {testimonial.feedbacks.map((feedback, idx) => (
+                                    <div key={idx} className="bg-white/40 p-6 rounded-2xl border border-white/50 backdrop-blur-sm">
+                                        <p className="font-sans-ui text-lg text-[#2E2E2E]/80 leading-relaxed">
+                                            "{feedback}"
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
                         )}
-                        <div>
-                            <h4 className="font-serif-display text-2xl text-[#2E2E2E] mb-1">
-                                {testimonial.author}
-                            </h4>
-                            <p className="font-sans-ui text-sm text-[#A88C5D] uppercase tracking-widest">
-                                {testimonial.role} @ {testimonial.company}
-                            </p>
+
+                        <div className="flex items-center gap-6 border-t border-[#2E2E2E]/10 pt-8">
+                            {testimonial.image && (
+                                <img src={testimonial.image} alt={testimonial.author} className="w-20 h-20 rounded-full object-cover" />
+                            )}
+                            <div>
+                                {testimonial.instagram ? (
+                                    <a
+                                        href={testimonial.instagram}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="font-serif-display text-2xl text-[#2E2E2E] mb-1 hover:text-[#A88C5D] transition-colors duration-300 inline-block"
+                                    >
+                                        {testimonial.author}
+                                    </a>
+                                ) : (
+                                    <h4 className="font-serif-display text-2xl text-[#2E2E2E] mb-1">
+                                        {testimonial.author}
+                                    </h4>
+                                )}
+                                <p className="font-sans-ui text-sm text-[#A88C5D] uppercase tracking-widest">
+                                    {testimonial.role} @ {testimonial.company}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

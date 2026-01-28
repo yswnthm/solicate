@@ -5,6 +5,8 @@ export interface Testimonial {
     role: string;
     company: string;
     image?: string;
+    instagram?: string;
+    feedbacks?: string[];
 }
 
 export const testimonials: Testimonial[] = [
@@ -31,5 +33,19 @@ export const testimonials: Testimonial[] = [
         role: "Creative Director",
         company: "Studio M",
         image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+    {
+        id: '4',
+        quote: "I absolutely loved the portfolio! The animations were simple yet unique, making everything look very clean and presentable. Thank you for being so patient and taking the time to explain everything. The portfolio looks perfect yet elegant. It was truly great working with you.",
+        author: "Kajal Goyal",
+        role: "Client",
+        company: "Portfolio Project",
+        image: "/kajal-goyal.jpg",
+        instagram: "https://www.instagram.com/kay.life173/",
+        feedbacks: [
+            "Thank you for sharing such an amazing portfolio, I absolutely loved it! I really appreciated how you kept the animations simple yet unique, making everything look very clean and presentable. It was truly great working with you.",
+            "Thnaks for explaining!! Really appreciate your time and effort you took. The portfolio looks perfect yet elegant. Thank you for being so patient it was great working with you.",
+            "Sure! Thanks great news🥳🥳🥳\nHappy to see you growing ✨✨✨"
+        ]
     }
 ];
