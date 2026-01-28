@@ -19,6 +19,7 @@ export const testimonials: Testimonial[] = [
         company: "Kaylife",
         image: "/kajal-goyal.jpg",
         instagram: "https://www.instagram.com/kay.life173/",
+        website: "https://kajal.solicate.in",
         feedbacks: [
             "Thank you for sharing such an amazing portfolio, I absolutely loved it! I really appreciated how you kept the animations simple yet unique, making everything look very clean and presentable. It was truly great working with you.",
             "Thnaks for explaining!! Really appreciate your time and effort you took. The portfolio looks perfect yet elegant. Thank you for being so patient it was great working with you.",
