@@ -32,7 +32,7 @@ const TestimonialRow: React.FC<{
                             <img
                                 src={testimonial.image}
                                 alt={testimonial.author}
-                                className="w-8 h-8 rounded-full object-cover grayscale opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                                className="w-8 h-8 rounded-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300"
                             />
                         )}
                         {testimonial.instagram ? (
