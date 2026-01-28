@@ -1,22 +1,28 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Analytics } from "@vercel/analytics/react"
-import { Hero } from './components/Hero';
-import { SelectedWork } from './components/SelectedWork';
-import { Capabilities } from './components/Capabilities';
-import { Process } from './components/Process';
-import { Journal } from './components/Journal';
+import { Home } from './pages/Home';
+import { CategoryPage } from './pages/CategoryPage';
 import { Footer } from './components/Footer';
 import { CustomCursor } from './components/CustomCursor';
-import { Ethos } from './components/Ethos';
-import { Principles } from './components/Principles';
-import { OtherWork } from './components/OtherWork';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App() {
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    ScrollTrigger.refresh();
+  }, [pathname]);
+
+  return null;
+}
+
+function AppContent() {
   const lenisRef = useRef<Lenis | null>(null);
 
   useLayoutEffect(() => {
@@ -47,25 +53,12 @@ function App() {
   return (
     <div className="antialiased selection:bg-[#2E2E2E] selection:text-[#EEECE7]">
       <CustomCursor />
+      <ScrollToTop />
 
-      <main
-        className="relative z-10 bg-[#EEECE7] shadow-2xl rounded-b-[3rem]"
-      >
-        <Hero />
-        <Ethos text="We shape ideas that settle like echoes in quiet rooms."
-          highlightWords={["echoes"]}
-          highlightColor="#D35400" />
-        <SelectedWork />
-        <Capabilities />
-        <Principles
-          text="Our principles are rooted in clarity, defined by honesty, and built to endure."
-          highlightWords={["clarity", "honesty", "endure"]}
-          highlightColor="#D35400"
-        />
-        <Process />
-        <OtherWork />
-        <Journal />
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/work/:category" element={<CategoryPage />} />
+      </Routes>
 
       <Footer />
 
@@ -77,6 +70,14 @@ function App() {
       />
       <Analytics />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 
