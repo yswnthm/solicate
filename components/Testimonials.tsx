@@ -117,19 +117,19 @@ export const Testimonials: React.FC = () => {
         <section id="testimonials" className="relative w-full bg-arctic-linen rounded-b-[3rem] z-10">
             <div className="flex flex-col md:flex-row min-h-screen">
                 {/* Sticky Left Column */}
-                <div className="w-full md:w-1/3 md:h-screen md:sticky md:top-0 p-6 md:p-12 flex flex-col justify-between border-r border-[#2E2E2E]/10">
+                <div className="w-full md:w-1/3 md:h-screen md:sticky md:top-0 p-6 md:p-12 flex flex-col justify-between border-r border-white/10 bg-nordic-charcoal rounded-bl-[3rem]">
                     <div>
-                        <div className="text-xs uppercase tracking-widest text-nordic-charcoal/50 mb-4">
+                        <div className="text-xs uppercase tracking-widest text-white/50 mb-4">
                             Testimonials
                         </div>
-                        <h2 className="font-serif-display text-5xl md:text-6xl text-[#2E2E2E] leading-tight max-w-sm">
+                        <h2 className="font-serif-display text-5xl md:text-6xl text-white leading-tight max-w-sm">
                             Voices from the <br />
-                            <span className="italic text-[#A88C5D]">collaboration</span>
+                            <span className="italic text-[#C7BBA3]">collaboration</span>
                         </h2>
                     </div>
 
                     <div className="hidden md:block">
-                        <p className="font-sans-ui text-sm text-[#2E2E2E]/60 max-w-xs">
+                        <p className="font-sans-ui text-sm text-white/60 max-w-xs">
                             Real feedback from partners who dared to reimagine their digital presence with us.
                         </p>
                     </div>

@@ -3,7 +3,6 @@ import { Hero } from '../components/Hero';
 import { ShowcaseCategories } from '../components/landing/ShowcaseCategories';
 import { Capabilities } from '../components/Capabilities';
 import { Process } from '../components/Process';
-import { Journal } from '../components/Journal';
 import { Ethos } from '../components/Ethos';
 import { Principles } from '../components/Principles';
 import { Testimonials } from '../components/Testimonials';
@@ -26,8 +25,6 @@ export const Home: React.FC = () => {
                 highlightColor="#D35400"
             />
             <Process />
-
-            <Journal />
             <Testimonials />
         </main>
     );
